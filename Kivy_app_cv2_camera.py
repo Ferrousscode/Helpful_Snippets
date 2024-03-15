@@ -40,12 +40,6 @@ class CameraApp(App):
 
     #cv2 Capture
     def runvideo(self):
-        #Creating named window 'Hidden'
-        cv2.namedWindow('Hidden', cv2.WINDOW_NORMAL | cv2.WINDOW_FREERATIO)
-        #Resizing the window to minimum
-        cv2.resizeWindow('Hidden', 0,0)
-        #hiding cv2 videowindow in top left screen
-        cv2.moveWindow('Hidden',-100,-100)
         #Capturing from source, ex: 'rtsp://username:password@172.0.0.1/live1.sdp'
         cap = cv2.VideoCapture('rtsp://username:password@IP-Address/live1.sdp')
         #cv2-loop
@@ -53,7 +47,6 @@ class CameraApp(App):
             ret, frame = cap.read()
             #initiating display_frame once for each loop
             Clock.schedule_once(partial(self.display_frame, frame))
-            cv2.imshow('Hidden', frame)
             cv2.waitKey(1)
         cap.release()
         cv2.destroyAllWindows()
